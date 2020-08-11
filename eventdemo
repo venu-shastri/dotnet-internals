@@ -1,17 +1,49 @@
-public class Window {
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Eventdemo
+{
+    public class Window {
         Button _clearButton = new Button();
         TextBox _textBox = new TextBox();
-
+        public Window()
+        {
+            Action _hanlderAddress = new Action(_textBox.Clear);
+            //.addon
+            //_clearButton.Add_Click(_handlerAddress);
+            _clearButton.Click += _hanlderAddress;
+        }
         public void SimulateButtonClick()
         {
             _clearButton.On_Click();
         }
     }
-    public class Button { 
-    
-        public void On_Click() { }
+    //Event Source
+    public class Button {
+
+        
+        public  event  Action Click;
+         public void On_Click() {
+            if (Click != null)
+            {
+                //Raise 
+                this.Click.Invoke();
+            }
+        }
     }
     public class TextBox {
     
         public void Clear() { Console.WriteLine("Clear TextBox Content"); }
     }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Window _window = new Window();
+            _window.SimulateButtonClick();
+        }
+    }
+}
