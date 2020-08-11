@@ -1,0 +1,17 @@
+public class Window {
+        Button _clearButton = new Button();
+        TextBox _textBox = new TextBox();
+
+        public void SimulateButtonClick()
+        {
+            _clearButton.On_Click();
+        }
+    }
+    public class Button { 
+    
+        public void On_Click() { }
+    }
+    public class TextBox {
+    
+        public void Clear() { Console.WriteLine("Clear TextBox Content"); }
+    }
